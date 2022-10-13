@@ -27,14 +27,9 @@ public class Game {
            Her skal der dog loades Chance-kort data istedet for felt data (jvf. Task 2.d)
          * */
 
-
-
+        String[] chanceData = fileIO.readChanceData();
         /*TODO: ændr dette konstruktor kald til Board, sådan at  Chance-kort data kommer med som argument (jvf. Task 2.d) */
-        board = new Board(fieldData);
-
-
-
-
+        board = new Board(fieldData, chanceData);
 
 
 
@@ -71,7 +66,7 @@ public class Game {
                 + "står på felt "
                 +currentPlayer.getPosition());
 
-        int result = 4;//Dice.rollDiceSum();//Det er denne linie du skal ændre for at teste forskellige felter!
+        int result = 7;//Dice.rollDiceSum();//Det er denne linie du skal ændre for at teste forskellige felter!
 
 
         int newPos = currentPlayer.updatePos(result);

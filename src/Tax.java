@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Tax extends Field{
     public Tax(int ID, String label, int cost, int income) {
         super(ID, label, cost, income);
@@ -24,12 +26,18 @@ public class Tax extends Field{
 
         float balance = p.getBalance();
         /*Todo: indkommenter følgende linje når metoden er skrevet: */
-       // float assets = calculateAssets(p);
-        float calcTax = balance * 1.0f; // todo:  ændres til denne assignment: balance + assets * 0.1f; (Når der er kommet en værdi i 'assets')
+        float assets = calculateAssets(p);
+        float calcTax = balance + assets * 0.1f; // todo: ændres til denne assignment: balance + assets * 0.1f; (Når der er kommet en værdi i 'assets')
 
         p.pay((int) calcTax);
 
         return p.getName()+" Afviste at betale et fast beløb i skat. Vi har derfor trukket 10 % af "+p.getName()+"'s aktiver";
     }
 
+
+    public int calculateAssets(Player p) {
+        int assets  = p.getBalance();
+        assets += p.getPropertyValues();
+        return assets;
+    }
 }

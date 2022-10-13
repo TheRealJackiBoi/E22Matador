@@ -3,7 +3,9 @@
 public class Board {
 
     private Field[] fields = new Field[40];
+    private static ChanceCard[] chanceCards = new ChanceCard[6];
 
+    private static int index = 0;
     /*
     * TODO:
     *   - udvid konstruktoren (jvf. Task 2.d)
@@ -12,8 +14,9 @@ public class Board {
     *
     * */
 
-    Board(String[] fielddata){
+    Board(String[] fielddata, String[] chanceData){
         createFields(fielddata);
+        createChanceCards(chanceData);
     }
 
     private Field[] createFields(String[] data){
@@ -66,5 +69,26 @@ public class Board {
         return fields[id];
     }
 
+    private void createChanceCards(String[] data) {
+        ChanceCard[] cards = new ChanceCard[6];
 
+        for (int i = 0; i < data.length; i++) {
+            String s = data[i];
+            String[] values = s.split(",");
+
+            String text = values[0];
+            int cost = Integer.parseInt(values[1]);
+            int income = Integer.parseInt(values[2]);
+
+            cards[i] = new ChanceCard(text, cost, income);
+
+        }
+        chanceCards = cards;
+    }
+
+    public static ChanceCard getChanceCard() {
+        ChanceCard c = chanceCards[index];
+        index++;
+        return c;
+    }
 }
